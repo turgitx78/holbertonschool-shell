@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
 # This script creates a PID file and handles signals
 
-if [ ! -d /var/run ]; then
-  mkdir -p /var 2>/dev/null
-  ln -s /run /var/run 2>/dev/null
-fi
-
 echo "$$" > /var/run/myscript.pid
 
 cleanup() {
   rm -f /var/run/myscript.pid
-  exit
+  exit 0
 }
 
 trap 'echo "Y U no love me?!"' SIGINT
-trap 'echo "I hate the kill command"; cleanup' SIGTERM SIGQUIT
+trap 'echo "I hate the kill command"; cleanup' SIGTERM
+trap 'cleanup' SIGQUIT
 
 while true; do
   echo "To infinity and beyond"
