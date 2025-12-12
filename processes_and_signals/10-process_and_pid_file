@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # This script creates a PID file and handles signals
 
-mkdir -p /var/run
+if [ ! -d /var/run ]; then
+  mkdir -p /var 2>/dev/null
+  ln -s /run /var/run 2>/dev/null
+fi
+
 echo "$$" > /var/run/myscript.pid
 
 cleanup() {
