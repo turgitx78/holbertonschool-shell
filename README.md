@@ -1,1 +1,1 @@
-Holberton School Shell Project
+Shell basics and scripting project
